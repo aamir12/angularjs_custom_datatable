@@ -12,11 +12,12 @@ app.directive('myRepeatDirective', function() {
 app.controller('listdata',function($scope, $http){
 	$scope.users = []; //declare an empty array
 	$scope.current_page = 1;
-
+    let defaultPerPage = 10;
     $scope.isLoading = true;
 	$scope.$on('LastElem', function(event,data){
-	  console.log(data);
 	  $scope.isLoading = false;
+	  console.log("lastElem")
+	  $scope.showFilterStatus();
     });
 	
 	$http.get("mockJson/mock.json").then(function(response){ 
@@ -24,9 +25,7 @@ app.controller('listdata',function($scope, $http){
 	});
 	
 	$scope.sort = function(keyname){
-		if($scope.current_page>1){
-			$scope.current_page = 1;
-		}
+		$scope.resetPage();
 		$scope.sortKey = keyname;   //set the sortKey to the param passed
 		$scope.reverse = !$scope.reverse; //if true make it false and vice versa
 
@@ -34,22 +33,39 @@ app.controller('listdata',function($scope, $http){
 
 	$scope.filterKey = 'All'
 	$scope.setFilter = function(key){
-		if($scope.current_page>1){
-			$scope.current_page = 1;
-		}
+		$scope.resetPage();
 		$scope.filterKey = key;
 	}
 
 	
     $scope.onSearch = function(){
+		$scope.resetPage();
+	}
+
+	
+	$scope.resetPage = function(){
 		if($scope.current_page>1){
 			$scope.current_page = 1;
 		}
+		
+		if($scope.itemsPerPages < defaultPerPage){
+			$scope.showFilterStatus();
+		}
 	}
 
+	$scope.showFilterStatus = function(){
+		let filteredItems =  $scope.filteredItems.length;
+		console.log("showFilterStatus");
+		//let total = $scope.users;
+		$scope.from  = ($scope.current_page-1)*$scope.itemsPerPages+ 1;
+		console.log($scope.current_page);
+		$scope.to = $scope.current_page*$scope.itemsPerPages;
+		if(filteredItems<=$scope.itemsPerPages){
+			$scope.to = filteredItems;
+		}
+	}
     
 	$scope.customFilter = function(users){
-
 		if($scope.filterKey == 'All'){
 		  return true;
 		}

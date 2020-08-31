@@ -34,10 +34,9 @@
 					<p>Current Page: {{current_page}}</p>
 					<p>Total Filter Records: {{ filteredItems.length}} </p>
 					<!-- <p>Showing {{(current_page-1)*itemsPerPages+ 1}} to {{ current_page*itemsPerPages}} </p> -->
+					<p ng-if="filteredItems.length>0">Showing {{from}} to {{to}} of {{filteredItems.length}}  entries</p>
 				</div>
 				<form class="form-inline">
-					
-
 					<div class="form-group ">
 						<button type="button" class="btn btn-sm btn-primary" ng-class="{active:filterKey=='Gaming'}" ng-click="setFilter('Gaming')">
 						   Gaming
@@ -59,6 +58,7 @@
 
 						<select ng-model="itemsPerPages" class="form-control"
 							ng-init="itemsPerPages =  10"
+							ng-change="resetPage()"
 							ng-options="o as o for o in [5,10,25,100]">
 						</select>
 					</div>
@@ -115,7 +115,7 @@
 				
 				<div class="text-center">
 					<dir-pagination-controls
-					max-size="5"
+					max-size="7"
 					direction-links="true"
 					boundary-links="true" >
 				   </dir-pagination-controls>
