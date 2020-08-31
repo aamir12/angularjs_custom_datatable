@@ -16,7 +16,6 @@ app.controller('listdata',function($scope, $http){
     $scope.isLoading = true;
 	$scope.$on('LastElem', function(event,data){
 	  $scope.isLoading = false;
-	  console.log("lastElem")
 	  $scope.showFilterStatus();
     });
 	
@@ -47,7 +46,7 @@ app.controller('listdata',function($scope, $http){
 		if($scope.current_page>1){
 			$scope.current_page = 1;
 		}
-		
+
 		if($scope.itemsPerPages < defaultPerPage){
 			$scope.showFilterStatus();
 		}
@@ -55,10 +54,8 @@ app.controller('listdata',function($scope, $http){
 
 	$scope.showFilterStatus = function(){
 		let filteredItems =  $scope.filteredItems.length;
-		console.log("showFilterStatus");
 		//let total = $scope.users;
 		$scope.from  = ($scope.current_page-1)*$scope.itemsPerPages+ 1;
-		console.log($scope.current_page);
 		$scope.to = $scope.current_page*$scope.itemsPerPages;
 		if(filteredItems<=$scope.itemsPerPages){
 			$scope.to = filteredItems;
