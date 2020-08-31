@@ -57,7 +57,8 @@ app.controller('listdata',function($scope, $http){
 		//let total = $scope.users;
 		$scope.from  = ($scope.current_page-1)*$scope.itemsPerPages+ 1;
 		$scope.to = $scope.current_page*$scope.itemsPerPages;
-		if(filteredItems<=$scope.itemsPerPages){
+		console.log($scope.to);
+		if(filteredItems<= $scope.itemsPerPages || $scope.to >= filteredItems){
 			$scope.to = filteredItems;
 		}
 	}
