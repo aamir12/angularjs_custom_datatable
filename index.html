@@ -37,6 +37,7 @@
 					<p ng-if="filteredItems.length>0">Showing {{from}} to {{to}} of {{filteredItems.length}}  entries</p>
 				</div>
 				<form class="form-inline">
+					<!-- custome filter buttons -->
 					<div class="form-group ">
 						<button type="button" class="btn btn-sm btn-primary" ng-class="{active:filterKey=='Gaming'}" ng-click="setFilter('Gaming')">
 						   Gaming
@@ -49,20 +50,17 @@
 						<button type="button" class="btn btn-sm btn-danger" ng-class="{active:filterKey=='Football'}" ng-click="setFilter('Football')">
 							Football
 						</button>
-
-
-
 						<button type="button" class="btn btn-sm btn-info" ng-class="{active:filterKey=='All'}" ng-click="setFilter('All')">
 							All
 						</button>
-
+                       <!-- show per page -->
 						<select ng-model="itemsPerPages" class="form-control"
 							ng-init="itemsPerPages =  10"
 							ng-change="resetPage()"
 							ng-options="o as o for o in [5,10,25,100]">
 						</select>
 					</div>
-
+                    <!-- text search -->
 					<div class="form-group pull-right">
 						<label >Search</label>
 						<input type="text" ng-model="search" ng-keyup="onSearch()" class="form-control" placeholder="Search">
@@ -71,6 +69,7 @@
 				</form>
 				
 				<div class="table-responsive" >
+					<!-- show loading -->
 					<div ng-show="isLoading">
 						Loading...
 				    </div>
@@ -113,6 +112,7 @@
 				</table> 
 				</div>
 				
+				<!-- pagination -->
 				<div class="text-center">
 					<dir-pagination-controls
 					max-size="6"

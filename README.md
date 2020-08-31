@@ -4,3 +4,5 @@ Custom Datatable in angularjs.
 It is client side datatable used to filter records in easiest way
 
 
+
+
