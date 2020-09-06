@@ -34,7 +34,7 @@
 					<p>Current Page: {{current_page}}</p>
 					<p>Total Filter Records: {{ filteredItems.length}} </p>
 					<!-- <p>Showing {{(current_page-1)*itemsPerPages+ 1}} to {{ current_page*itemsPerPages}} </p> -->
-					<p ng-if="filteredItems.length>0">Showing {{from}} to {{to}} of {{filteredItems.length}}  entries</p>
+					<p ng-if="filteredItems.length>0">Showing {{from}} to {{to>filteredItems.length ?filteredItems.length: to }} of {{filteredItems.length}}  entries</p>
 				</div>
 				<form class="form-inline">
 					<!-- custome filter buttons -->
